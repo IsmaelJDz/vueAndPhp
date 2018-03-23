@@ -1,4 +1,5 @@
 <?php
+
 $conn = new mysqli( 'localhost', 'root', '', 'vue_students' );
 
 if ( $conn->connect_error ) {

@@ -288,12 +288,15 @@
             this.showDeleteModal=!this.showDeleteModal
           }
         },
-        setMessages(res){
+        setMessages(res,removeBucle){
           if (res.data.error==1) {
             this.errorMessage = res.data.message
           }else{
+            if (removeBucle != 'read') {
+              this.successMessage = res.data.message
+              this.getAllStudents()
+            }
             this.successMessage = res.data.message
-            this.getAllStudents()
           }
 
           setTimeout(() =>{
@@ -305,7 +308,8 @@
           axios.get('./api.php?action=read')
             .then(res=>{
               //console.log(res)
-              this.setMessages(res)
+              let removeBucle = 'read'
+              this.setMessages(res,removeBucle)
               this.students = res.data.students
             })
         },
